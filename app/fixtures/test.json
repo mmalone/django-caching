@@ -1,0 +1,82 @@
+[
+  {
+    "pk": 1, 
+    "model": "app.author", 
+    "fields": {
+      "name": "Mike Malone"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "app.author", 
+    "fields": {
+      "name": "Willy Wonka"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "app.author", 
+    "fields": {
+      "name": "Harry Potter"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "app.site", 
+    "fields": {
+      "name": "blog"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "app.site", 
+    "fields": {
+      "name": "Site 2"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "app.article", 
+    "fields": {
+      "sites": [], 
+      "name": "Article 1", 
+      "author": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "app.article", 
+    "fields": {
+      "sites": [], 
+      "name": "Article 2", 
+      "author": 1
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "app.article", 
+    "fields": {
+      "sites": [], 
+      "name": "Article 3", 
+      "author": 1
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "app.article", 
+    "fields": {
+      "sites": [], 
+      "name": "Article 4", 
+      "author": 1
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "app.article", 
+    "fields": {
+      "sites": [], 
+      "name": "Article 5", 
+      "author": 2
+    }
+  }
+]
