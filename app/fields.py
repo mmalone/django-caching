@@ -16,7 +16,7 @@ def fix_where(where, modified=False):
         def add(self, *args, **kwargs):
             """
             Wraps django.db.models.sql.where.add to indicate that a new
-            'where' condition has been added. 
+            'where' condition has been added.
             """
             self.modified = True
             return f(*args, **kwargs)
@@ -50,7 +50,7 @@ def get_pk_list_query_set(superclass):
                 superiter = super(PKListQuerySet, self).iterator()
                 while True:
                     yield superiter.next()
-        
+
         def _clone(self, *args, **kwargs):
             c = super(PKListQuerySet, self)._clone(*args, **kwargs)
             c.query.where = fix_where(c.query.where, modified=self.query.where.modified)
@@ -70,7 +70,7 @@ def get_caching_related_manager(superclass, instance, field_name, related_name):
             pk_list = cache.get(key)
             if pk_list is None:
                 pk_list = qs.values_list('pk', flat=True)
-                cache.add(key, pk_list, CACHE_DURATION)
+                cache.add(key, list(pk_list), CACHE_DURATION)
             else:
                 qs.from_cache = True
             qs.pk_list = pk_list
@@ -101,9 +101,9 @@ class CachingReverseManyRelatedObjectsDescriptor(ReverseManyRelatedObjectsDescri
     def __get__(self, instance, cls=None):
         manager = super(CachingReverseManyRelatedObjectsDescriptor, self).__get__(instance, cls)
 
-        CachingRelatedManager = get_caching_related_manager(manager.__class__, 
-                                                            instance, 
-                                                            self.field.name, 
+        CachingRelatedManager = get_caching_related_manager(manager.__class__,
+                                                            instance,
+                                                            self.field.name,
                                                             self.field.rel.related_name)
 
         manager.__class__ = CachingRelatedManager
@@ -131,3 +131,4 @@ class CachingManyToManyField(ManyToManyField):
     def contribute_to_related_class(self, cls, related):
         super(CachingManyToManyField, self).contribute_to_related_class(cls, related)
         setattr(cls, related.get_accessor_name(), CachingManyRelatedObjectsDescriptor(related))
+
